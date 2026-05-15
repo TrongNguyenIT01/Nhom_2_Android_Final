@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Nhom_2_Android_Final</string>
+    <string name="welcome">Chào mừng bạn!</string>
+    <string name="subtitle">Luyện thi Toán cùng chúng tôi</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="login">Đăng nhập</string>
+    <string name="no_account">Chưa có tài khoản? </string>
+    <string name="register_now">Đăng ký ngay</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="already_have_account">Đã có tài khoản? </string>
+    <string name="register">Đăng ký</string>
 </resources>
