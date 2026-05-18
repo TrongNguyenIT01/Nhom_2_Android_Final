@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">Nhom_2_Android_Final</string>
+    <string name="welcome">Chào mừng bạn!</string>
+    <string name="subtitle">Luyện thi Toán cùng chúng tôi</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="login">Đăng nhập</string>
+    <string name="no_account">Chưa có tài khoản? </string>
+    <string name="register_now">Đăng ký ngay</string>
+    <string name="create_account">Tạo tài khoản</string>
+    <string name="full_name">Họ và tên</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="already_have_account">Đã có tài khoản? </string>
+    <string name="register">Đăng ký</string>
+    <string name="select_grade">Chọn khối lớp</string>
+    <string name="grade_10">Khối 10</string>
+    <string name="grade_11">Khối 11</string>
+    <string name="grade_12">Khối 12</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="welcome_user">Chào mừng, %1$s!</string>
+    <string name="user_name_default">Nguyễn Văn A</string>
+    <string name="dashboard_title">Bảng điều khiển</string>
+    <string name="exam_practice">Chọn đề và thi</string>
+    <string name="exam_history">Lịch sử làm bài</string>
+    <string name="statistics">Thống kê kết quả</string>
+    <string name="settings">Cài đặt</string>
+    <string name="dark_mode">Chế độ ban đêm</string>
+    <string name="font_size">Kích thước chữ</string>
+    <string name="font_small">Nhỏ</string>
+    <string name="font_medium">Vừa</string>
+    <string name="font_large">Lớn</string>
+    <string name="notification_desc">Thông báo</string>
+    <string name="study_progress">Tiến độ học tập</string>
+    <string name="progress_message">Bạn đã hoàn thành 65% bài tập tuần này. Cố gắng lên nhé!</string>
 </resources>
