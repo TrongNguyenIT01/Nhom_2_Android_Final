@@ -14,10 +14,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Hiển thị tên người dùng mẫu
-        TextView tvUserName = findViewById(R.id.tvUserName);
-        // Tên sẽ được lấy trực tiếp từ file XML hoặc bạn có thể gán lại ở đây nếu cần
-        // tvUserName.setText(getString(R.string.user_name_default));
+        // TextView
+        TextView tvUserName =
+                findViewById(R.id.tvUserName);
+        TextView tvUserGrade = findViewById(R.id.tvUserGrade);
+
+        // Nhận dữ liệu từ LoginActivity
+        String userName =
+                getIntent().getStringExtra("USER_NAME");
+        int userGrade = getIntent().getIntExtra("USER_GRADE",0);
+
+        // Hiển thị tên
+        tvUserName.setText(userName);
+        tvUserGrade.setText("Khối: "+ userGrade);
 
         // Thiết lập các sự kiện click cho Dashboard
         MaterialCardView cardExam = findViewById(R.id.cardExam);

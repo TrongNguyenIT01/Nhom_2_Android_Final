@@ -62,9 +62,10 @@
         app:startIconDrawable="@android:drawable/ic_dialog_email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etIdentifier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -87,6 +88,7 @@
         app:startIconDrawable="@android:drawable/ic_lock_idle_lock">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword" />
