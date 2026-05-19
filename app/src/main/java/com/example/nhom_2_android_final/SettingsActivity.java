@@ -1,5 +1,6 @@
 package com.example.nhom_2_android_final;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -49,6 +50,12 @@ public class SettingsActivity extends AppCompatActivity {
         findViewById(R.id.btnLarge).setOnClickListener(v -> {
             Toast.makeText(this, "Đã chọn kích thước chữ Lớn", Toast.LENGTH_SHORT).show();
             saveFontSize("large");
+        });
+
+        // Change Password navigation
+        findViewById(R.id.cardChangePassword).setOnClickListener(v -> {
+            Intent intent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
+            startActivity(intent);
         });
     }
 

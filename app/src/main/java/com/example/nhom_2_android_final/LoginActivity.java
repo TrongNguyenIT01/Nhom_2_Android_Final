@@ -1,6 +1,7 @@
 package com.example.nhom_2_android_final;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+        findViewById(R.id.tvForgotPassword).setOnClickListener(v -> {
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+        });
+
 
         findViewById(R.id.btnLogin).setOnClickListener(v -> performLogin());
     }
@@ -51,6 +56,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(User user) {
                 runOnUiThread(() -> {
+                    // Lưu UserID vào SharedPreferences để dùng cho các chức năng khác (như đổi mật khẩu)
+                    SharedPreferences sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+                    sharedPreferences.edit().putString("CurrentUserID", user.UserID).apply();
+
                     Toast.makeText(LoginActivity.this, "Chào mừng " + user.HoTen, Toast.LENGTH_SHORT).show();
                     
                     // Chuyển sang MainActivity và truyền dữ liệu qua Intent
