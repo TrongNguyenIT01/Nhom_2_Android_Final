@@ -37,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Thiết lập các sự kiện click cho Dashboard
         findViewById(R.id.cardExam).setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ExamListActivity.class);
+            // Chuyển đến màn hình Chọn Chủ Đề thay vì chọn Bài kiểm tra trực tiếp
+            Intent intent = new Intent(MainActivity.this, TopicListActivity.class);
             intent.putExtra("USER_ID", userId);
-            intent.putExtra("USER_GRADE", userGrade); // Sẽ dùng userGrade đã được cập nhật
+            intent.putExtra("USER_GRADE", userGrade);
             startActivity(intent);
         });
 

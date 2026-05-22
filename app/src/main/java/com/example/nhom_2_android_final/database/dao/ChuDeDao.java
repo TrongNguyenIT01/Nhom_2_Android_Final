@@ -14,4 +14,7 @@ public interface ChuDeDao {
 
     @Query("SELECT * FROM ChuDe")
     List<ChuDe> getAll();
+
+    @Query("SELECT * FROM ChuDe WHERE KhoiLop = :khoiLop")
+    List<ChuDe> getByKhoiLop(int khoiLop);
 }

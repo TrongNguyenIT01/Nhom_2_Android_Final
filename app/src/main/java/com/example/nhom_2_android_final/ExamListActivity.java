@@ -19,7 +19,7 @@ public class ExamListActivity extends AppCompatActivity {
     private ExamAdapter adapter;
     private List<BaiKiemTra> examList = new ArrayList<>();
     private AppDatabase db;
-    private int userGrade;
+    private String topicId;
     private String userId;
     private SearchView searchView;
 
@@ -28,16 +28,20 @@ public class ExamListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_list);
 
+        // Nhận thông tin từ TopicListActivity
+        topicId = getIntent().getStringExtra("TOPIC_ID");
+        userId = getIntent().getStringExtra("USER_ID");
+        String topicName = getIntent().getStringExtra("TOPIC_NAME");
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            if (topicName != null) {
+                getSupportActionBar().setTitle(topicName);
+            }
         }
         toolbar.setNavigationOnClickListener(v -> finish());
-
-        // Nhận thông tin user
-        userGrade = getIntent().getIntExtra("USER_GRADE", 10);
-        userId = getIntent().getStringExtra("USER_ID");
 
         initViews();
         setupSearch();
@@ -80,8 +84,8 @@ public class ExamListActivity extends AppCompatActivity {
 
     private void loadExams() {
         Executors.newSingleThreadExecutor().execute(() -> {
-            // Lấy danh sách bài kiểm tra theo khối lớp của user
-            List<BaiKiemTra> list = db.baiKiemTraDao().getByKhoiLop(userGrade);
+            // Lấy danh sách bài kiểm tra theo chủ đề đã chọn
+            List<BaiKiemTra> list = db.baiKiemTraDao().getByChuDe(topicId);
             runOnUiThread(() -> {
                 adapter.updateList(list);
             });

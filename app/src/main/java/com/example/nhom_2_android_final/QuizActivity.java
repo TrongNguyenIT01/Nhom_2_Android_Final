@@ -22,6 +22,7 @@ import com.example.nhom_2_android_final.database.entity.KetQua;
 import com.example.nhom_2_android_final.database.entity.KetQuaChiTiet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -108,6 +109,8 @@ public class QuizActivity extends AppCompatActivity {
             questionList = db.cauHoiDao().getByBaiKiemTra(examId);
             for (CauHoi ch : questionList) {
                 List<CauTraLoi> ctl = db.cauTraLoiDao().getByCauHoi(ch.IDCauHoi);
+                // Xáo trộn vị trí các câu trả lời
+                Collections.shuffle(ctl);
                 answerMap.put(ch.IDCauHoi, ctl);
             }
             runOnUiThread(() -> {
@@ -156,16 +159,17 @@ public class QuizActivity extends AppCompatActivity {
         rgAnswers.clearCheck();
 
         if (answers != null && answers.size() >= 4) {
-            rbA.setText(String.format("%s. %s", answers.get(0).NhanCauHoi, answers.get(0).NoiDung));
+            // Sử dụng nhãn A, B, C, D cố định theo thứ tự danh sách đã xáo trộn
+            rbA.setText(String.format("A. %s", answers.get(0).NoiDung));
             rbA.setTag(answers.get(0).DapAnID);
 
-            rbB.setText(String.format("%s. %s", answers.get(1).NhanCauHoi, answers.get(1).NoiDung));
+            rbB.setText(String.format("B. %s", answers.get(1).NoiDung));
             rbB.setTag(answers.get(1).DapAnID);
 
-            rbC.setText(String.format("%s. %s", answers.get(2).NhanCauHoi, answers.get(2).NoiDung));
+            rbC.setText(String.format("C. %s", answers.get(2).NoiDung));
             rbC.setTag(answers.get(2).DapAnID);
 
-            rbD.setText(String.format("%s. %s", answers.get(3).NhanCauHoi, answers.get(3).NoiDung));
+            rbD.setText(String.format("D. %s", answers.get(3).NoiDung));
             rbD.setTag(answers.get(3).DapAnID);
         }
 
