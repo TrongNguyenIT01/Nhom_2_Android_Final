@@ -4,9 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.example.nhom_2_android_final.database.AppDatabase;
+import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import java.util.concurrent.Executors;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -52,10 +56,39 @@ public class SettingsActivity extends AppCompatActivity {
             saveFontSize("large");
         });
 
+        // Chọn lại khối lớp
+        findViewById(R.id.cardChangeGrade).setOnClickListener(v -> {
+            String[] grades = {"Khối 10", "Khối 11", "Khối 12"};
+            new AlertDialog.Builder(this)
+                    .setTitle("Chọn lại khối lớp")
+                    .setItems(grades, (dialog, which) -> {
+                        int newGrade = 10 + which;
+                        updateUserGrade(newGrade);
+                    })
+                    .show();
+        });
+
         // Change Password navigation
         findViewById(R.id.cardChangePassword).setOnClickListener(v -> {
             Intent intent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
             startActivity(intent);
+        });
+    }
+
+    private void updateUserGrade(int newGrade) {
+        String userId = sharedPreferences.getString("CurrentUserID", "");
+        if (userId.isEmpty()) return;
+
+        Executors.newSingleThreadExecutor().execute(() -> {
+            AppDatabase db = AppDatabase.getInstance(this);
+            User user = db.userDao().getUserById(userId);
+            if (user != null) {
+                user.KhoiLop = newGrade;
+                db.userDao().update(user);
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Đã đổi sang Khối " + newGrade, Toast.LENGTH_SHORT).show();
+                });
+            }
         });
     }
 

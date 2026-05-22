@@ -22,14 +22,14 @@ import androidx.room.PrimaryKey;
 public class KetQuaChiTiet {
     @PrimaryKey
     @NonNull
-    public int IDKQCT;
-
+    public String IDKQCT; // id sẽ có kiểu IDKetQua + "_" + IDCauHoi
+    @NonNull
     @ColumnInfo(name = "IDKetQua")
-    public int IDKetQua;
-
+    public String IDKetQua;
+    @NonNull
     @ColumnInfo(name = "IDCauHoi")
-    public int IDCauHoi;
-
+    public String IDCauHoi;
+    @NonNull
     @ColumnInfo(name = "DapAnID")
-    public Integer DapAnID;     // dùng Integer (không phải int) để cho phép NULL (bỏ qua câu)
+    public String DapAnID;     // dùng Integer (không phải int) để cho phép NULL (bỏ qua câu)
 }

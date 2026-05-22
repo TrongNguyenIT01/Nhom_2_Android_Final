@@ -5,9 +5,17 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.example.nhom_2_android_final.database.AppDatabase;
+import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.card.MaterialCardView;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
+
+    private String userId;
+    private int userGrade;
+    private String userName;
+    private TextView tvUserGrade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,37 +23,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // TextView
-        TextView tvUserName =
-                findViewById(R.id.tvUserName);
-        TextView tvUserGrade = findViewById(R.id.tvUserGrade);
+        TextView tvUserName = findViewById(R.id.tvUserName);
+        tvUserGrade = findViewById(R.id.tvUserGrade);
 
-        // Nhận dữ liệu từ LoginActivity
-        String userName =
-                getIntent().getStringExtra("USER_NAME");
-        int userGrade = getIntent().getIntExtra("USER_GRADE",0);
+        // Nhận dữ liệu ban đầu
+        userName = getIntent().getStringExtra("USER_NAME");
+        userGrade = getIntent().getIntExtra("USER_GRADE", 0);
+        userId = getIntent().getStringExtra("USER_ID");
 
-        // Hiển thị tên
-        tvUserName.setText(userName);
-        tvUserGrade.setText("Khối: "+ userGrade);
+        // Hiển thị thông tin ban đầu
+        tvUserName.setText(userName != null ? userName : "User");
+        tvUserGrade.setText("Khối: " + userGrade);
 
         // Thiết lập các sự kiện click cho Dashboard
-        MaterialCardView cardExam = findViewById(R.id.cardExam);
-        cardExam.setOnClickListener(v -> {
-            Toast.makeText(this, "Chức năng Chọn đề và thi đang phát triển", Toast.LENGTH_SHORT).show();
+        findViewById(R.id.cardExam).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ExamListActivity.class);
+            intent.putExtra("USER_ID", userId);
+            intent.putExtra("USER_GRADE", userGrade); // Sẽ dùng userGrade đã được cập nhật
+            startActivity(intent);
         });
 
-        MaterialCardView cardHistory = findViewById(R.id.cardHistory);
-        cardHistory.setOnClickListener(v -> {
+        findViewById(R.id.cardHistory).setOnClickListener(v -> {
             Toast.makeText(this, "Chức năng Lịch sử làm bài đang phát triển", Toast.LENGTH_SHORT).show();
         });
 
-        MaterialCardView cardStats = findViewById(R.id.cardStats);
-        cardStats.setOnClickListener(v -> {
+        findViewById(R.id.cardStats).setOnClickListener(v -> {
             Toast.makeText(this, "Chức năng Thống kê kết quả đang phát triển", Toast.LENGTH_SHORT).show();
         });
 
-        MaterialCardView cardSettings = findViewById(R.id.cardSettings);
-        cardSettings.setOnClickListener(v -> {
+        findViewById(R.id.cardSettings).setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
@@ -57,5 +63,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Tự động cập nhật lại khối lớp mới nhất từ Database khi quay lại màn hình này
+        if (userId != null) {
+            Executors.newSingleThreadExecutor().execute(() -> {
+                User user = AppDatabase.getInstance(this).userDao().getUserById(userId);
+                if (user != null) {
+                    userGrade = user.KhoiLop;
+                    runOnUiThread(() -> tvUserGrade.setText("Khối: " + userGrade));
+                }
+            });
+        }
     }
 }

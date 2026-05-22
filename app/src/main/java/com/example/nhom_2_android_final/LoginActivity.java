@@ -64,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                     
                     // Chuyển sang MainActivity và truyền dữ liệu qua Intent
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("USER_ID", user.UserID);
                     intent.putExtra("USER_NAME", user.HoTen);
                     intent.putExtra("USER_GRADE", user.KhoiLop);
 
