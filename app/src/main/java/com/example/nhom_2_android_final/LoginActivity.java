@@ -12,7 +12,7 @@ import com.example.nhom_2_android_final.Model.Login;
 import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
 
     private TextInputEditText etIdentifier, etPassword;
     private Login loginModel;

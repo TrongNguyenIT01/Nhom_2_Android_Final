@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class ExamListActivity extends AppCompatActivity {
+public class ExamListActivity extends BaseActivity {
 
     private RecyclerView rvExams;
     private ExamAdapter adapter;

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.example.nhom_2_android_final.Model.Regis;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
 
     private TextInputEditText etFullName, etEmail, etPassword, etConfirmPassword;
     private AutoCompleteTextView actvGrade;

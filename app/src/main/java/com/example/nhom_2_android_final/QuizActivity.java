@@ -31,7 +31,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends BaseActivity {
 
     private TextView tvQuestionCount, tvTimer, tvQuestionContent;
     private ProgressBar progressBar;

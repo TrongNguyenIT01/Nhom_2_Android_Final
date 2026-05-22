@@ -10,7 +10,7 @@ import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.card.MaterialCardView;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private String userId;
     private int userGrade;

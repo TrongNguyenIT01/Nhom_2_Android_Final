@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-public class TopicListActivity extends AppCompatActivity {
+public class TopicListActivity extends BaseActivity {
 
     private RecyclerView rvTopics;
     private TopicAdapter adapter;

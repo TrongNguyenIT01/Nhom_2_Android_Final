@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhom_2_android_final.Model.ChangePasswordModel;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class ChangePasswordActivity extends AppCompatActivity {
+public class ChangePasswordActivity extends BaseActivity {
 
     private TextInputEditText etOldPassword, etNewPassword, etConfirmNewPassword;
     private ChangePasswordModel model;

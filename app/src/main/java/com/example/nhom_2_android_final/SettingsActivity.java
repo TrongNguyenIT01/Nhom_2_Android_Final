@@ -5,14 +5,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import com.example.nhom_2_android_final.database.AppDatabase;
 import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import java.util.concurrent.Executors;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
 
@@ -41,19 +41,26 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         // Font Size
-        findViewById(R.id.btnSmall).setOnClickListener(v -> {
-            Toast.makeText(this, "Đã chọn kích thước chữ Nhỏ", Toast.LENGTH_SHORT).show();
-            saveFontSize("small");
-        });
+        MaterialButtonToggleGroup toggleGroupFontSize = findViewById(R.id.toggleGroupFontSize);
+        String currentFontSize = sharedPreferences.getString("FontSize", "medium");
+        if (currentFontSize.equals("small")) {
+            toggleGroupFontSize.check(R.id.btnSmall);
+        } else if (currentFontSize.equals("large")) {
+            toggleGroupFontSize.check(R.id.btnLarge);
+        } else {
+            toggleGroupFontSize.check(R.id.btnMedium);
+        }
 
-        findViewById(R.id.btnMedium).setOnClickListener(v -> {
-            Toast.makeText(this, "Đã chọn kích thước chữ Vừa", Toast.LENGTH_SHORT).show();
-            saveFontSize("medium");
-        });
-
-        findViewById(R.id.btnLarge).setOnClickListener(v -> {
-            Toast.makeText(this, "Đã chọn kích thước chữ Lớn", Toast.LENGTH_SHORT).show();
-            saveFontSize("large");
+        toggleGroupFontSize.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.btnSmall) {
+                    saveFontSize("small");
+                } else if (checkedId == R.id.btnMedium) {
+                    saveFontSize("medium");
+                } else if (checkedId == R.id.btnLarge) {
+                    saveFontSize("large");
+                }
+            }
         });
 
         // Chọn lại khối lớp
@@ -93,7 +100,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void saveFontSize(String size) {
-        sharedPreferences.edit().putString("FontSize", size).apply();
-        // Lưu ý: Để thay đổi font size toàn app cần khởi động lại activity hoặc sử dụng BaseActivity
+        String currentSize = sharedPreferences.getString("FontSize", "medium");
+        if (!currentSize.equals(size)) {
+            sharedPreferences.edit().putString("FontSize", size).apply();
+            Toast.makeText(this, "Đã đổi kích thước chữ. Vui lòng khởi động lại ứng dụng để áp dụng hoàn toàn.", Toast.LENGTH_SHORT).show();
+            recreate();
+        }
     }
 }
