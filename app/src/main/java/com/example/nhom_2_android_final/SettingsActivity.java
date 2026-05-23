@@ -103,7 +103,7 @@ public class SettingsActivity extends BaseActivity {
         String currentSize = sharedPreferences.getString("FontSize", "medium");
         if (!currentSize.equals(size)) {
             sharedPreferences.edit().putString("FontSize", size).apply();
-            Toast.makeText(this, "Đã đổi kích thước chữ. Vui lòng khởi động lại ứng dụng để áp dụng hoàn toàn.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đã cập nhật kích thước chữ", Toast.LENGTH_SHORT).show();
             recreate();
         }
     }

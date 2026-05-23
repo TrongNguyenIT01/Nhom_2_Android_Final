@@ -26,14 +26,14 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     @NonNull
     @Override
     public TopicViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_topic, parent, false);
         return new TopicViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TopicViewHolder holder, int position) {
         ChuDe topic = topicList.get(position);
-        holder.textView.setText(topic.TenChuDe);
+        holder.tvTopicName.setText(topic.TenChuDe);
         holder.itemView.setOnClickListener(v -> listener.onTopicClick(topic));
     }
 
@@ -43,11 +43,11 @@ public class TopicAdapter extends RecyclerView.Adapter<TopicAdapter.TopicViewHol
     }
 
     public static class TopicViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView tvTopicName;
 
         public TopicViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            tvTopicName = itemView.findViewById(R.id.tvTopicName);
         }
     }
 }
