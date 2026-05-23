@@ -45,7 +45,9 @@ public class MainActivity extends BaseActivity {
         });
 
         findViewById(R.id.cardHistory).setOnClickListener(v -> {
-            Toast.makeText(this, "Chức năng Lịch sử làm bài đang phát triển", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            intent.putExtra("USER_ID", userId);
+            startActivity(intent);
         });
 
         findViewById(R.id.cardStats).setOnClickListener(v -> {

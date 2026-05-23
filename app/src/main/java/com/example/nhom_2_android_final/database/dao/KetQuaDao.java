@@ -14,7 +14,11 @@ public interface KetQuaDao {
 
     @Query("SELECT * FROM KetQua WHERE UserID = :userId ORDER BY NgayNop DESC")
     List<KetQua> getHistoryByUserId(String userId);
-    
+
+    @androidx.room.Transaction
+    @Query("SELECT * FROM KetQua WHERE UserID = :userId ORDER BY NgayNop DESC")
+    List<HistoryResult> getFullHistoryByUserId(String userId);
+
     @Query("SELECT * FROM KetQua WHERE IDKetQua = :idKetQua")
     KetQua getById(String idKetQua);
 }
