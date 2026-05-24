@@ -10,4 +10,6 @@
     <color name="card_bg">#FFFFFF</color>
     <color name="explanation_bg">#F0F7FF</color>
     <color name="explanation_text">#555555</color>
+    <color name="selected_option_bg">#E3F2FD</color>
+    <color name="stroke_color">#DDDDDD</color>
 </resources>
