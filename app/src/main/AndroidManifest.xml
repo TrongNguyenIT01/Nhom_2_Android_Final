@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom_2_Android_Final">
+
+        <receiver android:name=".utils.NotificationReceiver" android:enabled="true" android:exported="false" />
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -50,6 +56,12 @@
             android:exported="false" />
         <activity
             android:name=".ResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StatisticsActivity"
             android:exported="false" />
     </application>
 

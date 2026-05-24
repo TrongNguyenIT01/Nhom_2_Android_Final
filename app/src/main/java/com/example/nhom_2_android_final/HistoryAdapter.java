@@ -13,9 +13,15 @@ import java.util.Locale;
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
     private List<HistoryResult> historyList;
+    private OnItemClickListener listener;
 
-    public HistoryAdapter(List<HistoryResult> historyList) {
+    public interface OnItemClickListener {
+        void onItemClick(HistoryResult item);
+    }
+
+    public HistoryAdapter(List<HistoryResult> historyList, OnItemClickListener listener) {
         this.historyList = historyList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -51,6 +57,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
         } else {
             holder.tvDate.setText(fullDate);
         }
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(item);
+            }
+        });
     }
 
     @Override

@@ -20,6 +20,7 @@ import com.example.nhom_2_android_final.database.entity.CauHoi;
 import com.example.nhom_2_android_final.database.entity.CauTraLoi;
 import com.example.nhom_2_android_final.database.entity.KetQua;
 import com.example.nhom_2_android_final.database.entity.KetQuaChiTiet;
+import com.example.nhom_2_android_final.utils.NotificationHelper;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -280,6 +281,10 @@ public class QuizActivity extends BaseActivity {
             final float finalScore = score;
             final int finalTimeSpent = timeSpent;
             final int totalCount = questionList.size();
+
+            // Hiển thị thông báo kết quả ra thanh thông báo hệ thống
+            String message = String.format(Locale.getDefault(), "Bạn đạt %.1f điểm (%d/%d câu đúng).", finalScore, finalCorrectCount, totalCount);
+            NotificationHelper.showNotification(this, "Kết quả bài kiểm tra", message);
 
             runOnUiThread(() -> {
                 Intent intent = new Intent(QuizActivity.this, ResultActivity.class);

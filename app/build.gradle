@@ -51,4 +51,9 @@ dependencies {
     // Gui mail
     implementation 'com.sun.mail:android-mail:1.6.7'
     implementation 'com.sun.mail:android-activation:1.6.7'
+    // avatar
+    implementation libs.glide
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+    // Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -1,5 +1,6 @@
 package com.example.nhom_2_android_final;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -31,7 +32,11 @@ public class HistoryActivity extends BaseActivity {
         rvHistory = findViewById(R.id.rvHistory);
         rvHistory.setLayoutManager(new LinearLayoutManager(this));
         
-        adapter = new HistoryAdapter(historyList);
+        adapter = new HistoryAdapter(historyList, item -> {
+            Intent intent = new Intent(HistoryActivity.this, ReviewActivity.class);
+            intent.putExtra("ID_KET_QUA", item.ketQua.IDKetQua);
+            startActivity(intent);
+        });
         rvHistory.setAdapter(adapter);
 
         loadHistory();

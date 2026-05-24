@@ -2,19 +2,42 @@ package com.example.nhom_2_android_final;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.nhom_2_android_final.database.AppDatabase;
 import com.example.nhom_2_android_final.database.entity.User;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.concurrent.Executors;
 
 public class SettingsActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
+    private ImageView ivAvatar;
+    private AppDatabase db;
+    private String userId;
+
+    private final ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    saveAvatarLocally(uri);
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +45,14 @@ public class SettingsActivity extends BaseActivity {
         setContentView(R.layout.activity_settings);
 
         sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        userId = sharedPreferences.getString("CurrentUserID", "");
+        db = AppDatabase.getInstance(this);
 
+        ivAvatar = findViewById(R.id.ivAvatar);
         findViewById(R.id.btnBack).setOnClickListener(v -> finish());
+        findViewById(R.id.btnChangeAvatar).setOnClickListener(v -> pickImageLauncher.launch("image/*"));
+
+        loadUserData();
 
         // Dark Mode
         SwitchMaterial switchDarkMode = findViewById(R.id.switchDarkMode);
@@ -82,12 +111,70 @@ public class SettingsActivity extends BaseActivity {
         });
     }
 
+    private void loadUserData() {
+        if (userId.isEmpty()) return;
+        Executors.newSingleThreadExecutor().execute(() -> {
+            User user = db.userDao().getUserById(userId);
+            if (user != null && user.AVT != null && !user.AVT.isEmpty()) {
+                File file = new File(user.AVT);
+                runOnUiThread(() -> {
+                    Glide.with(this)
+                            .load(user.AVT)
+                            .signature(new ObjectKey(file.exists() ? file.lastModified() : System.currentTimeMillis()))
+                            .centerCrop()
+                            .placeholder(android.R.drawable.sym_def_app_icon)
+                            .into(ivAvatar);
+                });
+            }
+        });
+    }
+
+    private void saveAvatarLocally(Uri uri) {
+        Executors.newSingleThreadExecutor().execute(() -> {
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                File file = new File(getFilesDir(), "avatar_" + userId + ".jpg");
+                FileOutputStream outputStream = new FileOutputStream(file);
+                
+                byte[] buffer = new byte[1024];
+                int read;
+                while ((read = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, read);
+                }
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
+
+                String imagePath = file.getAbsolutePath();
+                long lastModified = file.lastModified();
+                
+                // Update DB
+                User user = db.userDao().getUserById(userId);
+                if (user != null) {
+                    user.AVT = imagePath;
+                    db.userDao().update(user);
+                    
+                    runOnUiThread(() -> {
+                        Glide.with(this)
+                                .load(imagePath)
+                                .signature(new ObjectKey(lastModified))
+                                .centerCrop()
+                                .into(ivAvatar);
+                        Toast.makeText(this, "Cập nhật ảnh đại diện thành công", Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(this, "Lỗi khi lưu ảnh", Toast.LENGTH_SHORT).show());
+            }
+        });
+    }
+
     private void updateUserGrade(int newGrade) {
-        String userId = sharedPreferences.getString("CurrentUserID", "");
         if (userId.isEmpty()) return;
 
         Executors.newSingleThreadExecutor().execute(() -> {
-            AppDatabase db = AppDatabase.getInstance(this);
             User user = db.userDao().getUserById(userId);
             if (user != null) {
                 user.KhoiLop = newGrade;
