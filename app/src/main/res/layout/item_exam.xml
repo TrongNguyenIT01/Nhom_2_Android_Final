@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp">
 
@@ -33,7 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thời gian: 45 phút"
-                android:textColor="#666666"
+                android:textColor="@color/text_main"
+                android:alpha="0.7"
                 android:textSize="14sp" />
 
             <View
@@ -47,7 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Khối: 10"
-                android:textColor="#666666"
+                android:textColor="@color/text_main"
+                android:alpha="0.7"
                 android:textSize="14sp" />
         </LinearLayout>
 

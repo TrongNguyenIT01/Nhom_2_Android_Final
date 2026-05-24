@@ -3,4 +3,6 @@
     <color name="dashboard_bg">#121212</color>
     <color name="text_main">#FFFFFF</color>
     <color name="card_bg">#1E1E1E</color>
+    <color name="explanation_bg">#2C2C2C</color>
+    <color name="explanation_text">#E0E0E0</color>
 </resources>

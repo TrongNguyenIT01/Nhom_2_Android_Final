@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="@color/dashboard_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,14 +17,15 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            app:tint="@color/text_main" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Thống kê kết quả"
-            android:textColor="#333333"
+            android:textColor="@color/text_main"
             android:textSize="20sp"
             android:textStyle="bold" />
     </RelativeLayout>
@@ -43,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -56,6 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiến bộ điểm số (10 bài gần nhất)"
+                        android:textColor="@color/text_main"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 
@@ -71,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="4dp">
 
@@ -84,6 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tỷ lệ Câu Đúng / Câu Sai (Tổng cộng)"
+                        android:textColor="@color/text_main"
                         android:textStyle="bold"
                         android:layout_marginBottom="8dp"/>
 

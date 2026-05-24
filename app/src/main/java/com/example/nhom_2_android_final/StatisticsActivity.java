@@ -17,6 +17,8 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -65,6 +67,7 @@ public class StatisticsActivity extends BaseActivity {
     }
 
     private void setupLineChart(List<KetQua> results) {
+        int textColor = ContextCompat.getColor(this, R.color.text_main);
         ArrayList<Entry> entries = new ArrayList<>();
         ArrayList<String> labels = new ArrayList<>();
 
@@ -83,6 +86,7 @@ public class StatisticsActivity extends BaseActivity {
         dataSet.setCircleRadius(4f);
         dataSet.setDrawValues(true);
         dataSet.setValueTextSize(10f);
+        dataSet.setValueTextColor(textColor);
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
         LineData lineData = new LineData(dataSet);
@@ -92,7 +96,10 @@ public class StatisticsActivity extends BaseActivity {
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
         xAxis.setGranularity(1f);
-        
+        xAxis.setTextColor(textColor);
+
+        lineChart.getAxisLeft().setTextColor(textColor);
+        lineChart.getLegend().setTextColor(textColor);
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getDescription().setEnabled(false);
         lineChart.animateX(1000);
@@ -100,6 +107,7 @@ public class StatisticsActivity extends BaseActivity {
     }
 
     private void setupPieChart(List<KetQua> allResults) {
+        int textColor = ContextCompat.getColor(this, R.color.text_main);
         int totalCorrect = 0;
         int totalWrong = 0;
 
@@ -122,6 +130,10 @@ public class StatisticsActivity extends BaseActivity {
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setCenterText("Tỷ lệ Đúng/Sai");
+        pieChart.setCenterTextColor(textColor);
+        pieChart.setHoleColor(Color.TRANSPARENT);
+        pieChart.getLegend().setTextColor(textColor);
+        pieChart.setEntryLabelColor(textColor);
         pieChart.animateY(1000);
         pieChart.invalidate();
     }

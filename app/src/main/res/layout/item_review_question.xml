@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Nội dung câu hỏi"
-            android:textColor="#333333"
+            android:textColor="@color/text_main"
             android:textSize="16sp" />
 
         <!-- Container for SVG Image -->
@@ -49,6 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đáp án của bạn: ..."
+            android:textColor="@color/text_main"
             android:textStyle="italic" />
 
         <TextView
@@ -65,10 +67,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:background="#F0F7FF"
+            android:background="@color/explanation_bg"
             android:padding="8dp"
             android:text="Giải thích: ..."
-            android:textColor="#555555"
+            android:textColor="@color/explanation_text"
             android:textSize="14sp" />
 
     </LinearLayout>

@@ -64,6 +64,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/card_bg"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="2dp">
 
@@ -105,7 +106,8 @@
                     android:background="@drawable/bg_option_selector"
                     android:button="@null"
                     android:padding="16dp"
-                    android:text="Đáp án A" />
+                    android:text="Đáp án A"
+                    android:textColor="@color/text_main" />
 
                 <RadioButton
                     android:id="@+id/rbOptionB"
@@ -115,7 +117,8 @@
                     android:background="@drawable/bg_option_selector"
                     android:button="@null"
                     android:padding="16dp"
-                    android:text="Đáp án B" />
+                    android:text="Đáp án B"
+                    android:textColor="@color/text_main" />
 
                 <RadioButton
                     android:id="@+id/rbOptionC"
@@ -125,7 +128,8 @@
                     android:background="@drawable/bg_option_selector"
                     android:button="@null"
                     android:padding="16dp"
-                    android:text="Đáp án C" />
+                    android:text="Đáp án C"
+                    android:textColor="@color/text_main" />
 
                 <RadioButton
                     android:id="@+id/rbOptionD"
@@ -135,7 +139,8 @@
                     android:background="@drawable/bg_option_selector"
                     android:button="@null"
                     android:padding="16dp"
-                    android:text="Đáp án D" />
+                    android:text="Đáp án D"
+                    android:textColor="@color/text_main" />
             </RadioGroup>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
